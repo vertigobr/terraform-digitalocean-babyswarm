@@ -33,7 +33,7 @@ def parse_tfstate_data(resources):
 #        'tags.Role',
 #        'tags.Type',
 #        'tags.Ami'
-        'tags',
+        'tags.0',
         'name',
         'ipv4_address'
     ]
@@ -76,7 +76,7 @@ def create_inventory(instances):
 #        'tags.Role',
 #        'tags.Type',
 #        'tags.Ami'
-        'tags',
+        'tags.0',
         'region'
     ]
     for instance in instances:
