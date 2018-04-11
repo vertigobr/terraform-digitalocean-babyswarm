@@ -1,4 +1,5 @@
 babyswarm.auto.tfvars
 roles/
 .terraform/
+.vscode/
 
