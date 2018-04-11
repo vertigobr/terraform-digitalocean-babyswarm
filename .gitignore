@@ -2,4 +2,12 @@ babyswarm.auto.tfvars
 roles/
 .terraform/
 .vscode/
+**/*.backup
+**/*.backup
+**/*.backup
+**/*.backup
+**/*.backup
+**/*.backup
+**/*.backup
+**/*.backup
 
