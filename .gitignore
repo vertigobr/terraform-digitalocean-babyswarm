@@ -1,0 +1,4 @@
+babyswarm.auto.tfvars
+roles/
+.terraform/
+

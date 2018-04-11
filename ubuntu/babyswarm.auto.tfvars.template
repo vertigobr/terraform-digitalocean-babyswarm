@@ -1,0 +1,11 @@
+# api token (digital ocean)
+do_token = "DIGITAL-OCEAN-TOKEN"
+
+# root ssh keys (authorized_keys) - WORK ONLY ON DROPLET CREATION
+# these are the fingerprints as seen on D.O. security page
+ssh_keys = []
+
+# Images:
+# * 30970148 = Docker 17.12 on 16.04 (user "root")
+# * coreos-stable = CoreOS stable channel (user "core")
+do_image = "coreos-stable"
