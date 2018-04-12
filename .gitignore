@@ -3,11 +3,4 @@ roles/
 .terraform/
 .vscode/
 **/*.backup
-**/*.backup
-**/*.backup
-**/*.backup
-**/*.backup
-**/*.backup
-**/*.backup
-**/*.backup
-
+**/*.retry
