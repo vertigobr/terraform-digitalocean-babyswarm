@@ -42,3 +42,4 @@
     when: "docker_info.stdout.find('Swarm: inactive') != -1 and inventory_hostname in groups['swarm-worker']"
     retries: 3
     delay: 20
+

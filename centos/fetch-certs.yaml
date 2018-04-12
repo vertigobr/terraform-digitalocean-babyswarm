@@ -1,0 +1,32 @@
+---
+
+# secure docker daemon
+- hosts: swarm-manager
+  tasks:
+  - name: "fetch client certs (ca.pem)"
+    fetch:
+      src: /root/.docker/ca.pem
+      dest: certs/ca.pem
+      flat: yes
+  - name: "fetch client certs (cert.pem)"
+    fetch:
+      src: /root/.docker/cert.pem
+      dest: certs/cert.pem
+      flat: yes
+  - name: "fetch client certs (key.pem)"
+    fetch:
+      src: /root/.docker/key.pem
+      dest: certs/key.pem
+      flat: yes
+  - name: "fetch helper"
+    fetch:
+      src: /root/docker_env.sh
+      dest: ./docker_env.sh
+      flat: yes
+  - name: "replace DOCKER_HOST"
+    local_action: 
+      module: replace
+      path: ./docker_env.sh
+      regexp: '^export DOCKER_CERT_PATH=.*'
+      replace: 'export DOCKER_CERT_PATH=$(pwd)/certs'
+#      command sed 's/export DOCKER_CERT_PATH=.*/DOCKER_CERT_PATH=$(pwd)\/certs/g' -i ./docker_env.sh

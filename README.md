@@ -50,3 +50,20 @@ To setup swarm mode on all nodes run the command below (example based on centos 
 cd centos
 ansible-playbook -i terraform.py ../swarm-mode.yaml
 ```
+
+## Securing Docker Daemon
+
+This is useful to both secure the Docker socket *and* to access the docker daemon remotely.
+
+```sh
+ansible-galaxy -i install vertigobr.secure-docker-daemon -p ./roles
+ANSIBLE_ROLES_PATH=./roles ansible-playbook -i terraform.py ../secure-swarm.yaml
+```
+
+The client certificates were generated on the server (at "/root/.docker/"). Download them using scp or similar tool to use them. You can also download the docker_env.sh utility script to quickly setup your command line.
+
+## Fetching client certs
+
+```sh
+ansible-playbook -i terraform.py fetch-certs.yaml
+```

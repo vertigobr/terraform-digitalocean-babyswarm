@@ -4,3 +4,5 @@ roles/
 .vscode/
 **/*.backup
 **/*.retry
+*.pem
+
