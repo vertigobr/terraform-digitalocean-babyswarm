@@ -21,14 +21,9 @@ terraform init
 terraform apply
 ```
 
-* Check on Digital Ocean dashboard if servers were created and do a few tests on command line:
+* Check on Digital Ocean dashboard if servers were created.
 
-```sh
-python terraform.py --debug --list | jq    # dynamic ansible inventory
-ansible -i terraform.py -m ping all
-```
-
-## Tips
+### Tips
 
 To create just the manager node:
 
@@ -38,3 +33,20 @@ To create just the manager node with floating ip:
 
     terraform apply -target=digitalocean_droplet.vtg-manager -target=digitalocean_floating_ip.vtg-manager
 
+## How to use Ansible
+
+The challenge is to use the dynamic inventory present in "tfstate" to run our swarm setup playbook.
+
+The "terraform.py" script in each folder generates an ansible inventory from tfstate on current folder. You can run a few tests on command line:
+
+```sh
+python terraform.py --debug --list    # dynamic ansible inventory
+ansible -i terraform.py -m ping all   # pings all servers
+```
+
+To setup swarm mode on all nodes run the command below (example based on centos folder):
+
+```sh
+cd centos
+ansible-playbook -i terraform.py ../swarm-mode.yaml
+```
