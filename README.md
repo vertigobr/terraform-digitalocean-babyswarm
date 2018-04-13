@@ -60,7 +60,7 @@ ansible-galaxy -i install vertigobr.secure-docker-daemon -p ./roles
 ANSIBLE_ROLES_PATH=./roles ansible-playbook -i terraform.py ../secure-swarm.yaml
 ```
 
-The client certificates were generated on the server (at "/root/.docker/"). Download them using scp or similar tool to use them. You can also download the docker_env.sh utility script to quickly setup your command line.
+The client certificates were generated on the server (at "/root/.docker/"). Download them using the fetch-certs.yaml playbook or with any other tool like scp. You can also download the docker_env.sh utility script to quickly setup your command line.
 
 ## Fetching client certs
 
