@@ -3,12 +3,9 @@
 # secure docker daemon
 - hosts: swarm-manager
   roles:
-  - role: vertigobr.secure-docker-daemon
-    dds_host: "{{ ansible_eth0['ipv4']['address'] }}"
-    dds_restart_docker: yes
-#    dds_server_cert_path: /etc/default/docker
-
-#    - role: alexinthesky.secure-docker-daemon
+    - role: vertigobr.secure-docker-daemon
+      dds_host: "{{ ansible_eth0['ipv4']['address'] }}"
+      dds_restart_docker: yes
   tasks:
   - name: "create daemon.json file"
     copy:
@@ -20,4 +17,4 @@
           "tlskey": "/etc/docker/server-key.pem",
           "tlsverify": true
         }'
-      dest: /root/daemon.json
+      dest: /etc/docker/daemon.json

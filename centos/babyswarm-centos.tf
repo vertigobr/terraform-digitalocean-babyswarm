@@ -73,12 +73,12 @@ resource "digitalocean_droplet" "vtg-worker2" {
   }
 }
 
+/*
 resource "digitalocean_floating_ip" "vtg-manager" {
   droplet_id = "${digitalocean_droplet.vtg-manager.id}"
   region     = "${digitalocean_droplet.vtg-manager.region}"
 }
 
-/*
 resource "digitalocean_floating_ip" "vtg-worker1" {
   droplet_id = "${digitalocean_droplet.vtg-worker1.id}"
   region     = "${digitalocean_droplet.vtg-worker1.region}"
@@ -88,12 +88,14 @@ resource "digitalocean_floating_ip" "vtg-worker2" {
   droplet_id = "${digitalocean_droplet.vtg-worker2.id}"
   region     = "${digitalocean_droplet.vtg-worker2.region}"
 }
+
+output "floating ip address vtg-manager" {
+  value = "${digitalocean_floating_ip.vtg-manager.ip_address}"
+}
 */
 
 output "ip address vtg-manager" {
   value = "${digitalocean_droplet.vtg-manager.ipv4_address}"
 }
 
-output "floating ip address vtg-manager" {
-  value = "${digitalocean_floating_ip.vtg-manager.ip_address}"
-}
+
