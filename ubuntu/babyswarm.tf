@@ -13,6 +13,14 @@ provider "digitalocean" {
   token = "${var.do_token}"
 }
 
+resource "digitalocean_tag" "swarm-manager" {
+  name = "swarm-manager"
+}
+
+resource "digitalocean_tag" "swarm-worker" {
+  name = "swarm-worker"
+}
+
 # Create swarm manager and workers
 resource "digitalocean_droplet" "vtg-manager" {
   image    = "${var.do_image}"
@@ -20,10 +28,18 @@ resource "digitalocean_droplet" "vtg-manager" {
   region   = "nyc3"
   size     = "s-1vcpu-1gb"
   ssh_keys = "${var.ssh_keys}"
+  tags     = ["${digitalocean_tag.swarm-manager.id}"]
 
   provisioner "remote-exec" {
     inline = [
       "sudo apt-get -y install python",
+      "sed 's# -H fd://# #g' -i /etc/systemd/system/multi-user.target.wants/docker.service",
+      "sed 's# -H fd://# #g' -i /lib/systemd/system/docker.service",
+      "ufw allow 2377/tcp",
+      "ufw allow 7946/tcp",
+      "ufw allow 7946/udp",
+      "ufw allow 4789/udp",
+      "ufw reload",
     ]
   }
 }
@@ -34,10 +50,17 @@ resource "digitalocean_droplet" "vtg-worker1" {
   region   = "nyc3"
   size     = "s-1vcpu-1gb"
   ssh_keys = "${var.ssh_keys}"
+  tags     = ["${digitalocean_tag.swarm-worker.id}"]
 
   provisioner "remote-exec" {
     inline = [
       "sudo apt-get -y install python",
+      "sed 's# -H fd://# #g' -i /etc/systemd/system/multi-user.target.wants/docker.service",
+      "sed 's# -H fd://# #g' -i /lib/systemd/system/docker.service",
+      "ufw allow 7946/tcp",
+      "ufw allow 7946/udp",
+      "ufw allow 4789/udp",
+      "ufw reload",
     ]
   }
 }
@@ -48,10 +71,17 @@ resource "digitalocean_droplet" "vtg-worker2" {
   region   = "nyc3"
   size     = "s-1vcpu-1gb"
   ssh_keys = "${var.ssh_keys}"
+  tags     = ["${digitalocean_tag.swarm-worker.id}"]
 
   provisioner "remote-exec" {
     inline = [
       "sudo apt-get -y install python",
+      "sed 's# -H fd://# #g' -i /etc/systemd/system/multi-user.target.wants/docker.service",
+      "sed 's# -H fd://# #g' -i /lib/systemd/system/docker.service",
+      "ufw allow 7946/tcp",
+      "ufw allow 7946/udp",
+      "ufw allow 4789/udp",
+      "ufw reload",
     ]
   }
 }
