@@ -57,7 +57,7 @@ This is useful to both secure the Docker socket *and* to access the docker daemo
 
 ```sh
 ansible-galaxy -i install vertigobr.secure-docker-daemon -p ./roles
-ANSIBLE_ROLES_PATH=./roles ansible-playbook -i terraform.py ../secure-swarm.yaml
+ANSIBLE_ROLES_PATH=$(pwd)/roles ansible-playbook -i terraform.py ../secure-swarm.yaml
 ```
 
 The client certificates were generated on the server (at "/root/.docker/"). Download them using the fetch-certs.yaml playbook or with any other tool like scp. You can also download the docker_env.sh utility script to quickly setup your command line.

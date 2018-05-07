@@ -18,10 +18,8 @@
           "tlsverify": true
         }'
       dest: /etc/docker/daemon.json
-  - name: Reload docker service, in all cases
-    service:
-      name: docker
-      state: reloaded
+  - name: just force systemd to reread configs (2.4 and above)
+    systemd: daemon_reload=yes
   - name: Restart docker service, in all cases
     service:
       name: docker
